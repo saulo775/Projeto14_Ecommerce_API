@@ -4,7 +4,10 @@ import cors from 'cors'
 import chalk from "chalk";
 
 import db from './db.js'
-import getAllProducts from "./controllers/homeController.js";
+import {
+    getAllProducts,
+    getFeaturedProducts
+} from "./controllers/productsController.js";
 
 const app = express();
 app.use(json()).use(cors())
@@ -22,7 +25,8 @@ app.post("/save-products", async (req, res)=>{
     }
 });
 
-app.get("/home", getAllProducts);
+app.get("/products", getAllProducts);
+app.get("/featured-products", getFeaturedProducts);
 
 
 
