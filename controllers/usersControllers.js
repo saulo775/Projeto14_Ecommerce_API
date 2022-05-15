@@ -29,7 +29,7 @@ export async function SignUp(req, res){
 }
 
 export async function SignIn(req, res){
-    const {email} = req.body
+    
     const login = req.body
     console.log(login)
     try {       
