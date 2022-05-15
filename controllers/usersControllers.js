@@ -23,15 +23,14 @@ export async function SignUp(req, res){
        
 
     } catch (error){
-        console.log(error);
+        
         return res.status(500).send("Erro ao fazer o cadastro.");
     }
 }
 
-export async function SignIn(req, res){
-    
+export async function SignIn(req, res){    
     const login = req.body
-    console.log(login)
+    
     try {       
         
         const user = await db.collection("users").findOne({email: login.email})
