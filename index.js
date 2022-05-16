@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 
 import userRouter from "./routes/usersRouter.js";
+import cartRouter from "./routes/cartRouter.js";
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(cors({
 dotenv.config();
 
 app.use(userRouter)
+app.use(cartRouter)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server listening on ${process.env.PORT}`)

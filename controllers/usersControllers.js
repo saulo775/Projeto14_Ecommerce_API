@@ -10,7 +10,7 @@ export async function SignUp(req, res){
         const passwordCrypt = bcrypt.hashSync(password, 10)
      
         const existingEmail = await db.collection("users").findOne({email})
-        console.log("email..",existingEmail)
+        
 
         if(existingEmail){            
             return res.sendStatus(409).send('E-mail ja cadastrado')
@@ -24,7 +24,7 @@ export async function SignUp(req, res){
 
     } catch (error){
         
-        return res.status(500).send("Erro ao fazer o cadastro.");
+        // return res.status(500).send("Erro ao fazer o cadastro.");
     }
 }
 
@@ -40,7 +40,7 @@ export async function SignIn(req, res){
 
             await db.collection("sessions").insertOne({
                 token,
-                userID: user._id
+                userId: user._id
             })
 
             res.send({token})
