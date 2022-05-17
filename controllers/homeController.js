@@ -12,5 +12,4 @@ async function getAllProducts(req, res){
         res.status(500).send("Não foi possível buscar os produdos");
     }
 }
-
 export default getAllProducts;
