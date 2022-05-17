@@ -5,10 +5,8 @@ import { validateToken } from "../middleware/authMiddleware.js";
 
 const cartRouter = Router();
 
-//cartRouter.use(validateToken)
-
-cartRouter.post('/shoppingcart', AddShoppingCart);
-cartRouter.get('/shoppincart', GetShoppingCart);
-cartRouter.delete('/shoppingcart/:productId');
+cartRouter.post('/shoppingcart',validateToken, AddShoppingCart);
+cartRouter.get('/shoppincart',validateToken, GetShoppingCart);
+cartRouter.delete('/shoppingcart/:productId', validateToken);
 
 export default cartRouter;
