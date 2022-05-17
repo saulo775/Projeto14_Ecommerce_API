@@ -30,6 +30,7 @@ app.get("/featured-products", getFeaturedProducts);
 
 
 
+
 app.listen(process.env.PORT, () => {
     console.log(chalk.bold.green(`Server listening on ${process.env.PORT}`));
 })
