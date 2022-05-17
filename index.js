@@ -8,7 +8,10 @@ import passport from "passport"
 import userRouter from "./routes/usersRouter.js";
 import cartRouter from "./routes/cartRouter.js";
 import db from './db.js'
-import getAllProducts from "./controllers/homeController.js";
+import {
+    getAllProducts,
+    getFeaturedProducts
+} from "./controllers/productsController.js";
 
 const app = express();
 app.use(cookieSession({name: "session", keys: ["Saia De Filó"], maxAge: 24 * 60 * 60 * 100}));
@@ -36,7 +39,9 @@ app.post("/save-products", async (req, res)=>{
     }
 });
 
-app.get("/home", getAllProducts);
+app.get("/products", getAllProducts);
+app.get("/featured-products", getFeaturedProducts);
+
 app.listen(process.env.PORT, () => {
     console.log(`Server listening on ${process.env.PORT}`)
 });
