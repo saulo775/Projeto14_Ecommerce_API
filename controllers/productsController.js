@@ -1,5 +1,16 @@
 import db from "../db.js";
 
+export async function saveNewProduct(req, res){
+    const body = req.body;
+    try {
+        await db.collection("products").insertOne(body);
+        return res.send(body);
+    } catch (e) {
+        console.log(e)
+        res.status(422).send("Não foi possível cadastrar esse produto!");
+    }
+}
+
 export async function getAllProducts(req, res){
     try {
         const allProducts = await db.collection("products").find().toArray();
