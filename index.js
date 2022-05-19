@@ -8,6 +8,7 @@ import passport from "passport"
 import userRouter from "./routes/usersRouter.js";
 import cartRouter from "./routes/cartRouter.js";
 import db from './db.js'
+
 import {
     getAllProducts,
     getFeaturedProducts
