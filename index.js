@@ -7,12 +7,8 @@ import passport from "passport"
 
 import userRouter from "./routes/usersRouter.js";
 import cartRouter from "./routes/cartRouter.js";
-import db from './db.js'
+import productsRouter from "./routes/productsRouter.js";
 
-import {
-    getAllProducts,
-    getFeaturedProducts
-} from "./controllers/productsController.js";
 
 const app = express();
 app.use(cookieSession({name: "session", keys: ["Saia De Filó"], maxAge: 24 * 60 * 60 * 100}));
@@ -26,22 +22,9 @@ app.use(cors({
     credentials: true
 }));
 
-app.use(userRouter)
-app.use(cartRouter)
-
-app.post("/save-products", async (req, res)=>{
-    const body = req.body;
-    try {
-        await db.collection("products").insertOne(body);
-        return res.send(body);
-    } catch (e) {
-        console.log(e)
-        res.status(422).send("Não foi possível cadastrar esse produto!");
-    }
-});
-
-app.get("/products", getAllProducts);
-app.get("/featured-products", getFeaturedProducts);
+app.use(userRouter);
+app.use(cartRouter);
+app.use(productsRouter);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server listening on ${process.env.PORT}`)
