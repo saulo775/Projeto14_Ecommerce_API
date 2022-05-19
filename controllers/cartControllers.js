@@ -21,7 +21,7 @@ export async function GetShoppingCart(req, res) {
 
     } catch (error) {
         
-        res.status(500).send("Erro ao buscar produto.")
+        res.status(500).send("Erro ao buscar produto.");
     }
 }
 
