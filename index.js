@@ -7,8 +7,8 @@ import passport from "passport"
 
 import userRouter from "./routes/usersRouter.js";
 import cartRouter from "./routes/cartRouter.js";
-
 import productsRouter from "./routes/productsRouter.js";
+
 
 const app = express();
 app.use(cookieSession({name: "session", keys: ["Saia De Filó"], maxAge: 24 * 60 * 60 * 100}));

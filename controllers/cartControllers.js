@@ -1,10 +1,11 @@
 import db from "../db.js"
 
 export async function AddShoppingCart(req, res) {
-    const product = req.body
+    const {data, userId} = req.body
+    console.log(data)
     try {
-        await db.collection("cart").insertOne({ ...product, userId: user._id })
-        return res.status(200).send("Produto adicionado ao carrinho.")
+        await db.collection("cart").insertOne({...data, userId})
+        res.status(200).send("Produto adicionado ao carrinho.")
 
     } catch (error) {
         return res.status(500);
@@ -14,6 +15,7 @@ export async function AddShoppingCart(req, res) {
 export async function GetShoppingCart(req, res) {
     try {
         const { user } = res.locals
+        console.log(user)
         const product = await database.collection("cart").find({ userId: user._id }).toArray()
 
         res.send(product)
