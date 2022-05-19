@@ -3,7 +3,7 @@ import db from "../db.js"
 
 export async function AddShoppingCart(req, res) {
     const {data, userId} = req.body
- 
+    console.log(req.body.data)
     try {
         await db.collection("cart").insertOne({...data, userId})
         res.status(200).send("Produto adicionado ao carrinho.")
