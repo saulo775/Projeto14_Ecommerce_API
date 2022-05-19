@@ -2,13 +2,12 @@ import db from "../db.js"
 
 export async function AddShoppingCart(req, res) {
     const product = req.body
-
     try {
         await db.collection("cart").insertOne({ ...product, userId: user._id })
-        res.status(200).send("Produto adicionado ao carrinho.")
+        return res.status(200).send("Produto adicionado ao carrinho.")
 
     } catch (error) {
-        return res.status(500).send("Erro ao adicionar produto.");
+        return res.status(500);
     }
 }
 

@@ -11,7 +11,6 @@ export default async function signInSchema(req, res, next) {
 
     try{
         const value = await signInSchema.validateAsync(register)       
-        res.send(value)
     } catch (error){
         console.log(error.details.map(detail => detail.message))        
         res.status(403).send(error.details.map(detail => detail.message))
