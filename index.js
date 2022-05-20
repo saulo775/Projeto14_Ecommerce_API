@@ -8,6 +8,7 @@ import passport from "passport"
 import userRouter from "./routes/usersRouter.js";
 import cartRouter from "./routes/cartRouter.js";
 import productsRouter from "./routes/productsRouter.js";
+import checkoutRouter from "./routes/checkoutRouter.js";
 
 
 const app = express();
@@ -16,12 +17,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(json());
 dotenv.config();
-app.use(cors({
-    origin: "http://localhost:3000",
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true
-}));
+app.use(cors());
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", 'https://saia-de-filo-ecommerce.vercel.app/');
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+    next();
+});
+
+app.use(checkoutRouter);
 app.use(userRouter);
 app.use(cartRouter);
 app.use(productsRouter);
