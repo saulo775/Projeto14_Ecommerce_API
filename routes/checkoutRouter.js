@@ -1,15 +1,14 @@
 import { Router } from "express";
 
-import { AddCheckOut, GetCheckOut } from "../controllers/checkoutControllers";
-import checkoutSchema from "../middleware/authCheckoutMiddleware";
-import { validateToken } from "../middleware/authMiddleware";
+import { AddCheckOut, DeleteShoppingCart } from "../controllers/checkoutControllers.js";
+import checkoutSchema from "../middleware/authCheckoutMiddleware.js";
+import { validateToken } from "../middleware/authMiddleware.js";
 
 
-const chekoutRouter = Router();
+const checkoutRouter = Router();
 
-chekoutRouter.post("/checkout", validateToken, checkoutSchema, AddCheckOut);
-chekoutRouter.get("/checkout", validateToken, checkoutSchema, GetCheckOut);
+checkoutRouter.post("/checkout",validateToken, checkoutSchema, AddCheckOut);
+checkoutRouter.delete("/cart/:id", DeleteShoppingCart)
 
 
-
-export default chekoutRouter;
+export default checkoutRouter;

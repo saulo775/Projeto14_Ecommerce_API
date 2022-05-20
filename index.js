@@ -8,6 +8,7 @@ import passport from "passport"
 import userRouter from "./routes/usersRouter.js";
 import cartRouter from "./routes/cartRouter.js";
 import productsRouter from "./routes/productsRouter.js";
+import checkoutRouter from "./routes/checkoutRouter.js";
 
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(cors({
     credentials: true
 }));
 
+app.use(checkoutRouter);
 app.use(userRouter);
 app.use(cartRouter);
 app.use(productsRouter);
