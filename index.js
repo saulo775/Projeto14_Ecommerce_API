@@ -12,12 +12,12 @@ import checkoutRouter from "./routes/checkoutRouter.js";
 
 
 const app = express();
+app.use(cors());
 app.use(cookieSession({name: "session", keys: ["Saia De Filó"], maxAge: 24 * 60 * 60 * 100}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(json());
 dotenv.config();
-app.use(cors());
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", '*');
