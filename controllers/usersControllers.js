@@ -1,39 +1,38 @@
 import db from "../db.js"
 import bcrypt from "bcrypt"
-import {v4} from "uuid";
+import { v4 } from "uuid";
 
 
-export async function SignUp(req, res){
-    const {name, email, password} = req.body
-    
-    try{
+export async function SignUp(req, res) {
+    const { name, email, password } = req.body
+
+    try {
         const passwordCrypt = bcrypt.hashSync(password, 10)
-     
-        const existingEmail = await db.collection("users").findOne({email})
-        
 
-        if(existingEmail){            
+        const existingEmail = await db.collection("users").findOne({ email })
+
+
+        if (existingEmail) {
             return res.sendStatus(409).send('E-mail ja cadastrado')
         }
-        
 
-        await db.collection("users").insertOne({name, email, password: passwordCrypt})
-                  
+
+        await db.collection("users").insertOne({ name, email, password: passwordCrypt })
+
         res.status(201).send("Cadastro concluído.")
-       
 
-    } catch (error){        
-         return res.status(500).send("Erro ao fazer o cadastro.");
+    } catch (error) {
+        return res.status(500).send("Erro ao fazer o cadastro.");
     }
 }
 
-export async function SignIn(req, res){    
+export async function SignIn(req, res) {
     const login = req.body
-  
-    try {       
-        
+
+    try {
+
         const user = await db.collection("users").findOne({email: login.email})
-        
+
         if(user && bcrypt.compareSync(login.password, user.password)){
             const token = v4()
 
@@ -41,12 +40,12 @@ export async function SignIn(req, res){
                 token,
                 userId: user._id
             })
-            
+
             res.send({token, userId: user._id })
-            
+
         }else res.sendStatus(404);
-        
-    } catch(e){         
+
+    } catch(e){
          res.status(500)
     }
 }
